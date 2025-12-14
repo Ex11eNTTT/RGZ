@@ -1,0 +1,6 @@
+class Config:
+    # Используйте этот формат:
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg://postgres:postgres@localhost:5432/subscriptions_db'
+    
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'dev-secret-key'
