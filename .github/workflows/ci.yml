@@ -44,8 +44,7 @@ jobs:
     - name: Create test database tables
       env:
         DATABASE_URL: postgresql://postgres:password@localhost:5432/subscriptions_db_test
-      run: |
-        python -c "from app import app, db; from app import app; with app.app_context(): db.create_all(); print('Test database tables created successfully')"
+      run: python create_test_db.py
     
     - name: Run tests
       env:
