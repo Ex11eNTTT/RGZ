@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -38,18 +38,15 @@ jobs:
           pip install -r requirements-ci.txt
 
       - name: Run Bandit security check
-        run: |
-          bandit -r . -f json -o bandit-report.json || true
+        run: bandit -r . -f json -o bandit-report.json || true
 
       - name: Create test database tables
         env:
           DATABASE_URL: postgresql://postgres:password@localhost:5432/subscriptions_db_test
-        run: |
-          python -c "from app import app, db; with app.app_context(): db.create_all(); print('Test database tables created successfully')"
+        run: python -c "from app import app, db; with app.app_context(): db.create_all(); print('Test database tables created successfully')"
 
       - name: Run tests
         env:
           DATABASE_URL: postgresql://postgres:password@localhost:5432/subscriptions_db_test
           FLASK_ENV: testing
-        run: |
-          python -m pytest tests/ -v --tb=short
+        run: python -m pytest tests/ -v --tb=short
